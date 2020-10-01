@@ -7,6 +7,13 @@ var choiceA= document.getElementById("A");
 var choiceB= document.getElementById("B");
 var choiceC= document.getElementById("C");
 var choiceD= document.getElementById("D");
+var scoreContainer= document.getElementById("score-container");
+var initails = document.getElementById("initials");
+var lastScore = document.getElementById("lastScore");
+// var initailsInput = document.getElementById("initails");
+var scoreInput = document.getElementById ("yourScore");
+var submitButton = document.getElementById("submit");
+var userSpan = document.querySelector ("#last-user")
 // var anwserButtons = document.getElementsById ("anwser");
 
 //timer vars 
@@ -32,11 +39,11 @@ var questions = [
         question : "What does HTML stand for?",
 
         
-        choiceA : "Correct",
+        choiceA : "Hyper Text Markup Language",
 
-        choiceB : "Wrong",
+        choiceB : "HTML",
 
-        choiceC : "Wrong",
+        choiceC : "Hype Text More Lat",
 
         correct : "A"
 
@@ -46,11 +53,11 @@ var questions = [
 
         
 
-        choiceA : "Wrong",
+        choiceA : "CSS",
 
-        choiceB : "Correct",
+        choiceB : "Cascading Style Sheets",
 
-        choiceC : "Wrong",
+        choiceC : "CSS",
 
         correct : "B"
 
@@ -60,11 +67,11 @@ var questions = [
 
         
 
-        choiceA : "Wrong",
+        choiceA : "Java",
 
-        choiceB : "Wrong",
+        choiceB : "Java Storage",
 
-        choiceC : "Correct",
+        choiceC : "JavaScript",
 
         correct : "C"
 
@@ -98,72 +105,90 @@ function renderQuestion (){
     choiceA.innerHTML = q.choiceA;
     choiceB.innerHTML = q.choiceB;
     choiceC.innerHTML = q.choiceC;
-    choiceD.innerHTML = q.choiceD;
+    // choiceD.innerHTML = q.choiceD;
     
 
 } 
-
+//add event listerner for the button click 
 anwserButtonsElement.addEventListener("click", checkAnwser)
-    console.log ("hello ");
 
+function checkAnwser (e){
+    e.preventDefault();
+    console.log(e.target)
+    var userAnswer = e.target.getAttribute("id");  // A, B, C, or D
+    console.log(userAnswer + "|" + questions[runningQuestion].correct)
+        if (userAnswer === questions[runningQuestion].correct){
+            console.log ("yes");
+           
+            
+        } else {
+            console.log ("no");
+            secondsLeft -= 30;
 
+        }   
+        if(runningQuestion<lastQuestion){
+            renderQuestion (runningQuestion++);
+            
+        }
+        else {
+            clearInterval(myCountDown);
+            startButton.classList.remove("hide");
+            questionContainerElement.classList.add("hide");
+            showScore ();
+            
 
-    function checkAnwser (){
-        console.log ("Great")
-        var userAnwser = e.target.textContent;
-        if (runningQuestionIdx.correct===userAnwser)
-        
-    
-        // if (userAnwser === correct) 
-        //  alert ("Correct");
-        //  renderQuestion();
-        // }
-
-        // else {
-
-
-        // }
+        }
 
 
 }
 
+function showScore (){
+    scoreContainer.classList.remove("hide");
+    startButton.classList.remove("hide");
+    questionContainerElement.classList.add("hide");
+    // lastScore.classList.remove("hide");
 
 
+}
+
+var msgDiv = document.querySelector("#msg");
 
 
-      
+function displayMessage(type,message) {
+    msgDiv.textContent = message;
+    msgDiv.setAttribute ("class", type);
+}
+
+function renderLastRegistered (){
+
+}
+
+var initails = localStorage.getItem("initails");
+var score = localStorage.getItem("yourScore");
 
 
+if(initails !==null){
+    userSpan.textContent=initails;
+
+}
+
+if(score !== null ){
+    lastScore.textContent = score;
+} 
 
 
+submitButton.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    var initails = document.querySelector("#last-user").value;
+    var score = document.querySelector("#score").value;
 
 
-
-
-
-
-
-
-
-
-// for (var i=0; i <questions.length; i++);{
-//     questionForm.display (questions[i].promt);
-//     if (response==)
-// }
-
-
-
-
-// startButton.addEventListener("click", generateQuiz)
-
-
-// function generateQuiz (){
-//     event.preventDefault();
-  
-
-//     }
-
-// }
+    // displayMessage("YES");
+    localStorage.setItem("initails", initails);
+    localStorage.setItem("score", score);
+})
+renderLastRegistered();
 
 
 
@@ -208,11 +233,5 @@ anwserButtonsElement.addEventListener("click", checkAnwser)
 
 
 
-// for (var i=0;i<numQuestions;i++){
-//     if (userInput[i]==answers[i]){
-//     score += 1;
-//     }
-//     else{
-//     score += 0;
-//     }
+
     

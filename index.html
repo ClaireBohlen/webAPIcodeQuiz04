@@ -20,9 +20,40 @@
             <button class="choices" id="A">A</button>
             <button class="choices" id="B">B</button>
             <button class="choices" id="C">C</button>
-            <button class="choices" id="D">D</button>
+            <!-- <button class="choices" id="D">D</button> -->
         </div>
     </container>
+    <container id ="score-container" class="hide">
+        <div class="card">
+          <h2>Track Your Score</h2>
+          <form method="POST">
+            <div class="input-group">
+              <label for="initails-label">Initals</label>
+              <input type="text" name="email" id="initails" placeholder="CCB" />
+            </div>
+            <div class="input-group">
+              <label for="password">Your Score</label>
+              <input type="text" name="password" id="yourScore" placeholder="30 Seconds" />
+            </div>
+            <div id="msg"></div>
+            <button id="submit">Submit</button>
+          </form>
+        </div>
+  
+        <div class="card">
+          <h2>High Score:</h2>
+          <p><strong>User</strong> <span id="last-user"></span></p>
+          <p><strong>Score:</strong> <span id="last-score"></span></p>
+        </div>
+    </container>
+    
+    
+<!--     
+      <container id="score-container" class="hide">
+        <p><strong>Initails</strong> <span id="initals"></span></p>
+        <p><strong>High Score</strong> <span id="lastScore"></span></p>
+
+    </container> -->
 
     
 
